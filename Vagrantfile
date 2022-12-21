@@ -75,20 +75,21 @@ Vagrant.configure("2") do |config|
 
   # Client App server
   config.vm.define "client" do |app|
-    app.vm.hostname ="lx-app-client.client"
+    app.vm.hostname ="frontend"
     app.vm.network :private_network, ip: "192.168.64.2"
+    app.vm.network "forwarded_port", guest: 8000, host: 8000
   end
 
   # Backend App server
   config.vm.define "backend" do |backend|
-    backend.vm.hostname = "lx-app-backend.backend"
+    backend.vm.hostname = "backend"
     backend.vm.network :private_network, ip: "192.168.64.3"
-    backend.vm.network "forwarded_port", guest: 500, host: 500
+    backend.vm.network "forwarded_port", guest: 8001, host: 8001
   end
 
   #Mongodb server
   config.vm.define "mongodb" do |mongodb|
-    mongodb.vm.hostname = "lx-app-mongodb.mongodb"
+    mongodb.vm.hostname = "mongodb"
     mongodb.vm.network :private_network, ip: "192.168.64.4"
     mongodb.vm.network "forwarded_port", guest: 27017, host: 27017
   end
