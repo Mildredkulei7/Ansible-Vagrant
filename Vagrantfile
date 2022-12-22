@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
   #
   # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
+  #     vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
@@ -75,23 +75,23 @@ Vagrant.configure("2") do |config|
 
   # Client App server
   config.vm.define "client" do |app|
-    app.vm.hostname ="frontend"
-    app.vm.network :private_network, ip: "192.168.64.2"
-    app.vm.network "forwarded_port", guest: 8000, host: 8000
+    app.vm.hostname ="client"
+    app.vm.network :private_network, ip: "192.168.64.5"
+    
   end
 
   # Backend App server
   config.vm.define "backend" do |backend|
     backend.vm.hostname = "backend"
-    backend.vm.network :private_network, ip: "192.168.64.3"
-    backend.vm.network "forwarded_port", guest: 8001, host: 8001
+    backend.vm.network :private_network, ip: "192.168.64.6"
+    
   end
 
   #Mongodb server
   config.vm.define "mongodb" do |mongodb|
     mongodb.vm.hostname = "mongodb"
-    mongodb.vm.network :private_network, ip: "192.168.64.4"
-    mongodb.vm.network "forwarded_port", guest: 27017, host: 27017
+    mongodb.vm.network :private_network, ip: "192.168.64.7"
+    mongodb.vm.network "forwarded_port", guest: 27017, host: 27000
   end
 
   # Ansible provisioning.
